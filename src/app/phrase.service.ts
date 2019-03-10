@@ -8,17 +8,8 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
 @Injectable()
 export class PhraseService {
-    getPhrases(): Phrase[] {
-        return [
-          {
-            id: 1,
-            text: 'My name is Orly'
-          },
-          {
-            id: 2,
-            text: 'How are you?'
-          }
-        ]
+	getPhrases(): Observable<Phrase[]> {
+        return this.http.get<Phrase[]>('http://localhost:8080/api/phrases/');
     }
     
     constructor(

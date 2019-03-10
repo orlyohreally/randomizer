@@ -7,6 +7,17 @@ const app = express();
 //Serve only the static files form the dist directory
 app.use(express.static(__dirname + '/dist'));
 
+// routing
+app.get('/api/phrases', function(req, res){
+	Phrase.find(function(err, result) {
+		if(err) {
+			return console.error(err);
+		}
+		console.log(result);
+		res.send(result);
+	})
+
+});
 app.get('/*', function(req,res) {
     
 res.sendFile(path.join(__dirname+'/dist/index.html'));
@@ -33,14 +44,3 @@ function createPhrases() {
 		console.log(err, res);
 	});
 }
-// routing
-app.route('/api/phrases').get((req, res) => {
-	Phrase.find(function(err, result) {
-		if(err) {
-			return console.error(err);
-		}
-		console.log(result);
-		res.send(result);
-	})
-
-});

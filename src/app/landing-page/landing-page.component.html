@@ -1,4 +1,12 @@
-<div *ngFor="let phrase of phrases">
-  <span>{{phrase.id}}</span>
-  <span>{{phrase.text}}</span>
-</div>
+<mat-list>
+  <mat-list-item *ngFor="let phrase of phrases">
+    <h3 matLine> {{phrase.text}} </h3>
+    <p matLine>
+      <span> {{phrase.id}} </span>
+      <mat-form-field appearance="outline">
+		<mat-label>Phrase</mat-label>
+		<input matInput value="{{phrase.text}}" placeholder="Placeholder">
+	  </mat-form-field>
+    </p>
+  </mat-list-item>
+</mat-list>

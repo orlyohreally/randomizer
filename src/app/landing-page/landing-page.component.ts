@@ -27,7 +27,7 @@ export class LandingPageComponent implements OnInit {
   getPhrases(): void {
 	this.phraseService.getPhrases().subscribe(phrases => {
 	console.log("phrases", phrases);
-		//this.phrases = phrases;
+		this.phrases = phrases;
 	});   
   }
 }

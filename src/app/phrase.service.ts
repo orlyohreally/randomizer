@@ -9,7 +9,7 @@ import 'rxjs/add/observable/of';
 @Injectable()
 export class PhraseService {
 	getPhrases(): Observable<Phrase[]> {
-        return this.http.get<Phrase[]>('http://localhost:8080/api/phrases/');
+        return this.http.get<Phrase[]>('/api/phrases/');
     }
     
     constructor(

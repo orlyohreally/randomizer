@@ -1,12 +1,23 @@
-<mat-list>
-  <mat-list-item *ngFor="let phrase of phrases">
-    <h3 matLine> {{phrase.text}} </h3>
-    <p matLine>
-      <span> {{phrase.id}} </span>
-      <mat-form-field appearance="outline">
-		<mat-label>Phrase</mat-label>
-		<input matInput value="{{phrase.text}}" placeholder="Placeholder">
-	  </mat-form-field>
-    </p>
-  </mat-list-item>
-</mat-list>
+<div class="random-phrases">
+  <div class="loader">
+    <mat-spinner *ngIf="isLoading" [color]="primary"></mat-spinner>
+  </div>
+  <div class="phrases"*ngIf="!isLoading">
+      <form [formGroup]="phraseForm">
+        <div formArrayName="phrases">
+          <div *ngFor="let phrase of phraseForms.controls; let i=index" [formGroupName]="i">
+            <!--<mat-form-field appearance="outline">
+              <mat-label>Id</mat-label>
+              <input matInput formControlName="id">
+            </mat-form-field>-->
+            <mat-form-field appearance="outline">
+              <mat-label>Phrase</mat-label>
+              <input matInput formControlName="text">
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="removePhrase(i)">Remove phrase</button>
+          </div>
+        </div>
+      </form>
+    <button mat-raised-button color="primary" (click)="addPhrase()">Add new phrase</button>
+  </div>
+</div>

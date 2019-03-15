@@ -3,8 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 
 
 import { LandingPageComponent }   from './landing-page/landing-page.component';
+import { RandomPhraseComponent }   from './random-phrase/random-phrase.component';
 const routes: Routes = [
-  { path: '', component: LandingPageComponent },
+  { path: '', component: RandomPhraseComponent },
+  { path: 'list', component: LandingPageComponent },
+  
 ];
 
 @NgModule({

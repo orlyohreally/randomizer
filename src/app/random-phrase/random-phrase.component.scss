@@ -1,0 +1,20 @@
+.random-phrase {
+  width: 100%;
+  min-height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .phrase {
+    width: 80%;
+    text-align: center;
+  
+    ::ng-deep .mat-card-header-text {
+      width: 100%;
+    }
+    
+    .mat-raised-button {
+      margin-top: 15px;
+    }
+  }
+}

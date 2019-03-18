@@ -7,16 +7,19 @@ import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { MatListModule, MatInputModule, MatFormFieldModule, MatCardModule, MatButtonModule, MatProgressSpinnerModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
-import { LandingPageComponent } from './landing-page/landing-page.component';
+import { RandomPhrasesComponent } from './random-phrases/random-phrases.component';
 import { RandomPhraseComponent } from './random-phrase/random-phrase.component';
+import { RegisterPersonFormComponent } from './register-person-form/register-person-form.component';
 
 import { PhraseService } from './phrase.service';
-
+import { AuthenticationService } from './authentication.service';
 @NgModule({
   declarations: [
     AppComponent,
-    LandingPageComponent,
-    RandomPhraseComponent
+    RandomPhrasesComponent,
+    RandomPhraseComponent,
+    RegisterPersonFormComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,7 @@ import { PhraseService } from './phrase.service';
     MatProgressSpinnerModule,
     BrowserAnimationsModule
   ],
-  providers: [PhraseService],
+  providers: [PhraseService, AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

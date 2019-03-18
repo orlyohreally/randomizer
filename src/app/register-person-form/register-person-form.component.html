@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Register</h1>
+<div mat-dialog-content>
+  <form (submit)="register()">
+    <mat-form-field appearance="outline">
+      <mat-label>Login</mat-label>
+      <input matInput [(ngModel)]="credentials.login">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input matInput [(ngModel)]="credentials.password">
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Register</button>
+  </form>
+</div>

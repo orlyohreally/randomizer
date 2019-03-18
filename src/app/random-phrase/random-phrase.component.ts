@@ -3,6 +3,8 @@ import { PhraseService } from '../phrase.service'
 import { Phrase } from '../phrase';
 import { MatCardModule, MatButtonModule, MatProgressSpinnerModule} from '@angular/material';
 
+
+
 @Component({
   selector: 'app-random-phrase',
   templateUrl: './random-phrase.component.html',
@@ -21,7 +23,6 @@ export class RandomPhraseComponent implements OnInit {
     this.isLoading = true;
     this.phrases = [];
     this.phrase = {};
-    
     this.getPhrases();
   }
   
@@ -36,11 +37,9 @@ export class RandomPhraseComponent implements OnInit {
         console.log("phrases error", err);
         this.phrases = [
           {
-            id: 1,
             text: "text 1"
           },
           {
-            id: 2,
             text: "text testing"
           }
         ];
@@ -48,6 +47,7 @@ export class RandomPhraseComponent implements OnInit {
       }
     );   
   }
+  
   getRandomPhrase() {
     this.isLoading = true;
     const i = Math.floor(Math.random() * this.phrases.length);
@@ -55,5 +55,4 @@ export class RandomPhraseComponent implements OnInit {
     this.phrase = this.phrases[i];
     this.isLoading = false;
   }
-  
 }

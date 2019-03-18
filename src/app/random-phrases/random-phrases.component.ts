@@ -5,11 +5,11 @@ import { FormControl, FormGroup, Validators, FormBuilder, FormArray } from '@ang
 import { MatProgressSpinnerModule, MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 
 @Component({
-  selector: 'app-landing-page',
-  templateUrl: './landing-page.component.html',
-  styleUrls: ['./landing-page.component.scss']
+  selector: 'app-random-phrases',
+  templateUrl: './random-phrases.component.html',
+  styleUrls: ['./random-phrases.component.scss']
 })
-export class LandingPageComponent implements OnInit {
+export class RandomPhrasesComponent implements OnInit {
 
   public phrases: Phrase[];
   public phraseForm: FormGroup;

@@ -1,41 +1,74 @@
 const express = require('express');
 const path = require('path');
-const mongoose = require('mongoose');
+var passport = require('passport');
+var http = require('http');
+require('./api/models/db');
+require('./api/config/passport');
 const app = express();
+var routesApi = require('./api/routes/index');
 
 app.use(express.static(__dirname + '/dist'));
-
-app.get('/api/phrases', function(req, res){
-	Phrase.find(function(err, result) {
-		if(err) {
-			return console.error(err);
-		}
-		res.send(result);
-	})
-
-});
+app.use(passport.initialize());
+app.use('/api', routesApi);
 
 app.get('/*', function(req,res) {
   res.sendFile(path.join(__dirname+'/dist/index.html'));
 });
 
-app.listen(process.env.PORT || 8080);
-console.log("Listening on port ", process.env.PORT || 8080);
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
 
-var db = mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/randomizer');
-phraseSchema = createPhrasesCollection();
-Phrase = mongoose.model('Phrase', phraseSchema);
-//createPhrases();
+var server = http.createServer(app);
 
-function createPhrasesCollection() {
-	return new mongoose.Schema({
-		id: Number,
-		text: String
-	});
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
 }
-function createPhrases() {
-	var newPhrase = new Phrase({id: 1, text: "text testing"});
-	newPhrase.save(function(err, res) {
-		console.log(err, res);
-	});
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
 }
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  console.log('Listening on ' + bind);
+}
+console.log("Listening on port ", port);

@@ -1,13 +1,13 @@
 <h1 mat-dialog-title>Register</h1>
 <div mat-dialog-content>
-  <form (submit)="register()">
+  <form (submit)="register()" [formGroup]="registerForm" #lForm="ngForm">
     <mat-form-field appearance="outline">
       <mat-label>Login</mat-label>
-      <input matInput [(ngModel)]="credentials.login">
+      <input matInput formControlName="login" type="text">
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Password</mat-label>
-      <input matInput [(ngModel)]="credentials.password">
+      <input matInput formControlName="password" type="password">
     </mat-form-field>
     <button mat-raised-button color="primary" type="submit">Register</button>
   </form>

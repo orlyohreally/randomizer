@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 var passport = require('passport');
+var bodyParser = require('body-parser');
 var http = require('http');
 require('./api/models/db');
 require('./api/config/passport');
@@ -9,6 +10,12 @@ var routesApi = require('./api/routes/index');
 
 app.use(express.static(__dirname + '/dist'));
 app.use(passport.initialize());
+
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json())
+
 app.use('/api', routesApi);
 
 app.get('/*', function(req,res) {

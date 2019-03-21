@@ -31,7 +31,7 @@ personSchema.methods.generateJwt = function() {
     email: this.email,
     name: this.name,
     exp: parseInt(expiry.getTime() / 1000),
-  }, env.process.jsonwebtoken_secret || "MY_SECRET");
+  }, process.env.jsonwebtoken_secret || "MY_SECRET");
 };
 
 mongoose.model('Person', personSchema);

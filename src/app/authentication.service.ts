@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators/map';
 import { Router } from '@angular/router';
@@ -59,7 +59,7 @@ export class AuthenticationService {
     }
   }
 
-  private request(method: 'post'|'get', type: 'login'|'register'|'profile', person?: TokenPayload): Observable<any> {
+  /*private request(method: 'post'|'get', type: 'login'|'register'|'profile', person?: TokenPayload): Observable<any> {
     let base;
 
     if (method === 'post') {
@@ -79,12 +79,17 @@ export class AuthenticationService {
 
     return request;
   }
-
+*/
   public register(person: TokenPayload): Observable<any> {
-    return this.request('post', 'register', person);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.post('/api/register', JSON.stringify({"person": person}), httpOptions);
   }
 
-  public login(person: TokenPayload): Observable<any> {
+  /*public login(person: TokenPayload): Observable<any> {
     return this.request('post', 'login', person);
   }
 
@@ -96,5 +101,5 @@ export class AuthenticationService {
     this.token = '';
     window.localStorage.removeItem('mean-token');
     this.router.navigateByUrl('/');
-  }
+  }*/
 }

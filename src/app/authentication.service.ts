@@ -58,14 +58,14 @@ export class AuthenticationService {
       return false;
     }
   }
-
-  /*private request(method: 'post'|'get', type: 'login'|'register'|'profile', person?: TokenPayload): Observable<any> {
+//'login'|'register'|'profile'
+  private request(method: 'post'|'get', type: 'login'|'register', person?: TokenPayload): Observable<any> {
     let base;
 
     if (method === 'post') {
       base = this.http.post(`/api/${type}`, person);
     } else {
-      base = this.http.get(`/api/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
+      base = this.http.get(`/api/${type}`, { headers: this.getAuthHeaders()});
     }
 
     const request = base.pipe(
@@ -79,7 +79,7 @@ export class AuthenticationService {
 
     return request;
   }
-*/
+/*
   public register(person: TokenPayload): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -88,18 +88,21 @@ export class AuthenticationService {
     };
     return this.http.post('/api/register', JSON.stringify({"person": person}), httpOptions);
   }
-
-  /*public login(person: TokenPayload): Observable<any> {
+*/
+  public login(person: TokenPayload): Observable<any> {
     return this.request('post', 'login', person);
   }
-
-  public profile(): Observable<any> {
-    return this.request('get', 'profile');
+  public register(person: TokenPayload): Observable<any> {
+    return this.request('post', 'register', person);
   }
 
   public logout(): void {
     this.token = '';
     window.localStorage.removeItem('mean-token');
     this.router.navigateByUrl('/');
-  }*/
+  }
+  
+  public getAuthHeaders(){
+    return { Authorization: `Bearer ${this.getToken()}` };
+  }
 }

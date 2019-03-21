@@ -8,7 +8,7 @@ var sendJSONresponse = function(res, status, content) {
 };
 
 module.exports.register = function(req, res) {
-  var newPerson = req.body.person;
+  var newPerson = req.body;
   if(!newPerson.login || !newPerson.password) {
     sendJSONresponse(res, 400, {
       "message": "All fields required"
@@ -32,17 +32,17 @@ module.exports.register = function(req, res) {
 };
 
 module.exports.login = function(req, res) {
-
-  // if(!req.body.email || !req.body.password) {
-  //   sendJSONresponse(res, 400, {
-  //     "message": "All fields required"
-  //   });
-  //   return;
-  // }
+  console.log(req.body);
+  if(!req.body.login || !req.body.password) {
+    sendJSONresponse(res, 400, {
+      "message": "All fields required"
+    });
+    return;
+  }
 
   passport.authenticate('local', function(err, person, info){
     var token;
-
+    console.log(err, person, info);
     // If Passport throws/catches an error
     if (err) {
       res.status(404).json(err);

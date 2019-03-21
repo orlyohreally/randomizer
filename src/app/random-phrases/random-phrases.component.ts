@@ -14,14 +14,17 @@ export class RandomPhrasesComponent implements OnInit {
   public phrases: Phrase[];
   public phraseForm: FormGroup;
   public isLoading: boolean;
+  public errorMessage: String;
   constructor(private phraseService: PhraseService, private formBuilder: FormBuilder) { 
     
   }
   
   ngOnInit() {
+    this.errorMessage = '';
     this.isLoading = true;
     this.phrases = [];
     this.getPhrases();
+    
     console.log(this.phrases);
   }
   initPhrase() {
@@ -64,19 +67,29 @@ export class RandomPhrasesComponent implements OnInit {
       },
       err => {
         console.log("phrases error", err);
-        this.phrases = [
-          {
-            id: 1,
-            text: "text 1"
-          },
-          {
-            id: 2,
-            text: "text testing"
-          }
-        ];
-        
-        this.initForm();
+        if(err.status === 401) {
+          this.errorMessage = "Unauthorized";
+        }
+        else {
+          this.displayFake();
+        }
       }
     );   
+  }
+  
+  
+  displayFake(): void {
+    this.phrases = [
+      {
+        id: 1,
+        text: "text 1"
+      },
+      {
+        id: 2,
+        text: "text testing"
+      }
+    ];
+    
+    this.initForm();
   }
 }

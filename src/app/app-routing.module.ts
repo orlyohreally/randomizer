@@ -4,11 +4,13 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { RandomPhrasesComponent }   from './random-phrases/random-phrases.component';
 import { RandomPhraseComponent }   from './random-phrase/random-phrase.component';
+import { LoginPersonFormComponent }   from './login-person-form/login-person-form.component';
 import { RegisterPersonFormComponent }   from './register-person-form/register-person-form.component';
 const routes: Routes = [
   { path: '', component: RandomPhraseComponent },
-  { path: 'list', component: RandomPhrasesComponent },
+  { path: 'phrases', component: RandomPhrasesComponent },
   { path: 'register', component: RegisterPersonFormComponent },
+  { path: 'login', component: LoginPersonFormComponent },
   
 ];
 

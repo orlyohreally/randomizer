@@ -2,11 +2,12 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var mongoose = require('mongoose');
 var Person = mongoose.model('Person');
-
+console.log("passport");
 passport.use(new LocalStrategy({
     personnameField: 'login'
   },
   function(personname, password, done) {
+    console.log("api config password", personname, password, done);
     Person.findOne({ login: personname }, function (err, person) {
       if (err) { return done(err); }
       // Return if person not found in database

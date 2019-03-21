@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import { RandomPhrasesComponent } from './random-phrases/random-phrases.component';
 import { RandomPhraseComponent } from './random-phrase/random-phrase.component';
 import { RegisterPersonFormComponent } from './register-person-form/register-person-form.component';
-import { LoginDialogComponent } from './login-dialog/login-dialog.component';
+import { LoginPersonFormComponent } from './login-person-form/login-person-form.component';
 
 import { PhraseService } from './phrase.service';
 import { AuthenticationService } from './authentication.service';
@@ -20,7 +20,7 @@ import { AuthenticationService } from './authentication.service';
     RandomPhrasesComponent,
     RandomPhraseComponent,
     RegisterPersonFormComponent,
-    LoginDialogComponent
+    LoginPersonFormComponent
   ],
   imports: [
     BrowserModule,

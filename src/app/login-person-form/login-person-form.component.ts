@@ -6,36 +6,36 @@ import { FormControl, FormGroup }from '@angular/forms';
 
 @Component({
   selector: 'app-random-phrase',
-  templateUrl: './register-person-form.component.html',
-  styleUrls: ['./register-person-form.component.scss']
+  templateUrl: './login-person-form.component.html',
+  styleUrls: ['./login-person-form.component.scss']
 })
-export class RegisterPersonFormComponent implements OnInit {
+export class LoginPersonFormComponent implements OnInit {
 
   credentials: TokenPayload = {
     login: '',
     password: ''
   };
-  registerForm: FormGroup;
+  loginForm: FormGroup;
   constructor(private authenticationService: AuthenticationService, private router: Router) { 
     
   }
    
   ngOnInit() {
-    this.registerForm = new FormGroup({
+    this.loginForm = new FormGroup({
       'login': new FormControl(),
       'password': new FormControl()
     });
   }
-  get login() { return this.registerForm.get('login'); }
-  get password() { return this.registerForm.get('password'); }
+  get login() { return this.loginForm.get('login'); }
+  get password() { return this.loginForm.get('password'); }
   
-  register() {
+  loginPerson() {
     this.credentials = {
-      login: this.registerForm.get('login').value,
-      password: this.registerForm.get('password').value,
+      login: this.loginForm.get('login').value,
+      password: this.loginForm.get('password').value,
     }
     console.log(this.credentials);
-    this.authenticationService.register(this.credentials).subscribe(() => {
+    this.authenticationService.login(this.credentials).subscribe(() => {
       this.router.navigateByUrl('/phrases');
     },
     (err) => {

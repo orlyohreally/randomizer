@@ -21,3 +21,6 @@
     <button mat-raised-button color="primary" (click)="addPhrase()">Add new phrase</button>
   </div>
 </div>
+<div *ngIf="!!errorMessage">
+  {{errorMessage}}
+</div>

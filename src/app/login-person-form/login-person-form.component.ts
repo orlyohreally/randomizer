@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatButtonModule, MatFormFieldModule, MatInputModule} from '@angular/material';
+import { MatButtonModule, MatFormFieldModule, MatInputModule, MatCardModule, MatProgressSpinnerModule } from '@angular/material';
 import { AuthenticationService, TokenPayload } from '../authentication.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup }from '@angular/forms';
@@ -16,11 +16,15 @@ export class LoginPersonFormComponent implements OnInit {
     password: ''
   };
   loginForm: FormGroup;
+  isLoading: boolean;
+  errorMessage: String;
+  
   constructor(private authenticationService: AuthenticationService, private router: Router) { 
     
   }
    
   ngOnInit() {
+    this.isLoading = false;
     this.loginForm = new FormGroup({
       'login': new FormControl(),
       'password': new FormControl()
@@ -30,17 +34,29 @@ export class LoginPersonFormComponent implements OnInit {
   get password() { return this.loginForm.get('password'); }
   
   loginPerson() {
+    this.startLoading();
     this.credentials = {
       login: this.loginForm.get('login').value,
       password: this.loginForm.get('password').value,
     }
-    console.log(this.credentials);
     this.authenticationService.login(this.credentials).subscribe(() => {
+      this.stopLoading();
       this.router.navigateByUrl('/phrases');
     },
     (err) => {
+      this.stopLoading();
       console.log(err);
+      this.errorMessage = err.message;
     });
+  }
+  
+  startLoading(): void {
+    this.isLoading = true;
+    this.errorMessage = '';
+  }
+  
+  stopLoading(): void {
+    this.isLoading = false;
   }
   
 }

@@ -1,14 +1,29 @@
-<h1 mat-dialog-title>Login</h1>
-<div mat-dialog-content>
-  <form (submit)="loginPerson()" [formGroup]="loginForm" #lForm="ngForm">
-    <mat-form-field appearance="outline">
-      <mat-label>Login</mat-label>
-      <input matInput formControlName="login" type="text">
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Password</mat-label>
-      <input matInput formControlName="password" type="password">
-    </mat-form-field>
-    <button mat-raised-button color="primary" type="submit">Login</button>
-  </form>
+<div class="login-form">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        Login
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form (submit)="loginPerson()" [formGroup]="loginForm" #lForm="ngForm">
+        <mat-form-field appearance="outline">
+          <mat-label>Login</mat-label>
+          <input matInput formControlName="login" type="text">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="password" type="password">
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Login</button>
+      </form>
+      <div *ngIf="!!errorMessage" class="error-message">
+        {{errorMessage}}
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="loader" *ngIf="isLoading">
+    <mat-spinner [color]="primary"></mat-spinner>
+  </div>
 </div>

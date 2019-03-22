@@ -1,0 +1,22 @@
+.login-form {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .mat-card-content {
+    text-align: center;
+    
+    .mat-input-container {
+      width: 100%;
+    }
+    
+    .error-message {
+      margin: 5px;
+    }
+  }
+  .loader {
+    margin: 15px;
+  }
+}

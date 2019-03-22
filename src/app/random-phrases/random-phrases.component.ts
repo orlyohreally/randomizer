@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { PhraseService } from '../phrase.service'
 import { Phrase } from '../phrase';
 import { FormControl, FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
@@ -15,7 +16,7 @@ export class RandomPhrasesComponent implements OnInit {
   public phraseForm: FormGroup;
   public isLoading: boolean;
   public errorMessage: String;
-  constructor(private phraseService: PhraseService, private formBuilder: FormBuilder) { 
+  constructor(private phraseService: PhraseService, private formBuilder: FormBuilder, private router: Router) { 
     
   }
   
@@ -46,6 +47,7 @@ export class RandomPhrasesComponent implements OnInit {
     });
     this.isLoading = false;
   }
+  
   addPhrase() {
     const phrase = this.formBuilder.group({
       id: null,
@@ -68,9 +70,10 @@ export class RandomPhrasesComponent implements OnInit {
       err => {
         console.log("phrases error", err);
         if(err.status === 401) {
-          this.errorMessage = "Unauthorized";
+          this.router.navigateByUrl('/login');
         }
         else {
+          this.errorMessage = err;
           this.displayFake();
         }
       }

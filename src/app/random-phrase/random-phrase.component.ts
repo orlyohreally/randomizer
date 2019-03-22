@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { PhraseService } from '../phrase.service'
 import { Phrase } from '../phrase';
 import { MatCardModule, MatButtonModule, MatProgressSpinnerModule} from '@angular/material';
@@ -15,7 +16,8 @@ export class RandomPhraseComponent implements OnInit {
   public phrases: Phrase[];
   public phrase: Phrase;
   public isLoading: boolean;
-  constructor(private phraseService: PhraseService) { 
+  public errorMessage: String;
+  constructor(private phraseService: PhraseService, private router: Router) { 
     
   }
    
@@ -34,16 +36,14 @@ export class RandomPhraseComponent implements OnInit {
         this.getRandomPhrase();
       },
       err => {
-        console.log("phrases error", err);
-        this.phrases = [
-          {
-            text: "text 1"
-          },
-          {
-            text: "text testing"
-          }
-        ];
-        this.getRandomPhrase();
+        console.log("phrase error", err);
+        if(err.status === 401) {
+          this.router.navigateByUrl('/login');
+        }
+        else {
+          this.errorMessage = err;
+          this.displayFake();
+        }
       }
     );   
   }
@@ -54,5 +54,18 @@ export class RandomPhraseComponent implements OnInit {
     console.log("getting radom phrase", i);
     this.phrase = this.phrases[i];
     this.isLoading = false;
+  }
+  
+  displayFake(): void {
+    this.phrases = [
+      {
+        id: 1,
+        text: "text 1"
+      },
+      {
+        id: 2,
+        text: "text testing"
+      }
+    ];
   }
 }

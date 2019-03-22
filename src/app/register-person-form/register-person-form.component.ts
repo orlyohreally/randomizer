@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-random-phrase',
+  selector: 'app-register-form',
   templateUrl: './register-person-form.component.html',
   styleUrls: ['./register-person-form.component.scss']
 })

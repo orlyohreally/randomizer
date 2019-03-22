@@ -79,19 +79,11 @@ export class AuthenticationService {
 
     return request;
   }
-/*
-  public register(person: TokenPayload): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
-    return this.http.post('/api/register', JSON.stringify({"person": person}), httpOptions);
-  }
-*/
+  
   public login(person: TokenPayload): Observable<any> {
     return this.request('post', 'login', person);
   }
+  
   public register(person: TokenPayload): Observable<any> {
     return this.request('post', 'register', person);
   }

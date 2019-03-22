@@ -67,5 +67,6 @@ export class RandomPhraseComponent implements OnInit {
         text: "text testing"
       }
     ];
+    this.getRandomPhrase();
   }
 }

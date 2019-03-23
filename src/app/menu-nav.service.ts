@@ -11,7 +11,7 @@ export class MenuNavService {
       {
         name: 'random-phrase',
         label: 'Random phrase',
-        path: '/',
+        path: '',
         auth: true
       },
       {
@@ -26,12 +26,12 @@ export class MenuNavService {
         path: '/login',
         auth: false
       },
-      {
+      /*{
         name: 'register',
         label: 'Register',
         path: '/register',
         auth: false
-      },
+      },*/
       {
         name: 'logout',
         label: 'Log out',

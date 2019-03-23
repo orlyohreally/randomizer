@@ -10,7 +10,7 @@ var ctrlPhrase = require('../controllers/phrase');
 router.get('/phrases', auth, ctrlPhrase.list);
 
 var ctrlAuth = require('../controllers/authentication');
-router.post('/register', ctrlAuth.register);
+//router.post('/register', ctrlAuth.register);
 router.post('/login', ctrlAuth.login);
 
 

@@ -9,7 +9,7 @@ import { LogoutComponent }   from './logout/logout.component';
 
 const routes: Routes = [
   { path: '', component: RandomPhraseComponent },
-  { path: '/phrase', component: RandomPhraseComponent },
+  { path: 'phrase', component: RandomPhraseComponent },
   { path: 'phrases', component: RandomPhrasesComponent },
   //{ path: 'register', component: RegisterPersonFormComponent },
   { path: 'login', component: LoginPersonFormComponent },

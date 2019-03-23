@@ -16,6 +16,8 @@ export class MenuNavComponent implements OnInit {
    
   ngOnInit() {
     this.navLinks = this.menuNavService.getNavMenu();
+    console.log("this.navLinks", this.navLinks);
+  
   }
 
   

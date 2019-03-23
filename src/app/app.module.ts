@@ -17,6 +17,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { PhraseService } from './phrase.service';
 import { AuthenticationService } from './authentication.service';
 import { MenuNavService } from './menu-nav.service';
+import { AuthFilterPipe } from './shared/menu-nav-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { MenuNavService } from './menu-nav.service';
     RegisterPersonFormComponent,
     LoginPersonFormComponent,
     LogoutComponent,
-    MenuNavComponent
+    MenuNavComponent,
+    AuthFilterPipe
   ],
   imports: [
     BrowserModule,
@@ -42,6 +44,7 @@ import { MenuNavService } from './menu-nav.service';
     MatTabsModule,
     MatProgressSpinnerModule,
     BrowserAnimationsModule
+    
   ],
   providers: [PhraseService, AuthenticationService, MenuNavService],
   bootstrap: [AppComponent]

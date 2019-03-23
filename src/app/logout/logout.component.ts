@@ -20,6 +20,7 @@ export class LogoutComponent implements OnInit {
   
   logout(): void {
     this.authenticationService.logout();
-    this.router.navigateByUrl('/login');
+    //this.router.navigateByUrl('/login');
+    window.location.href = '/login';
   }
 }

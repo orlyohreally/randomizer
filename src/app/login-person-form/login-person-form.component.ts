@@ -41,7 +41,8 @@ export class LoginPersonFormComponent implements OnInit {
     }
     this.authenticationService.login(this.credentials).subscribe(() => {
       this.stopLoading();
-      this.router.navigateByUrl('/phrases');
+      //this.router.navigateByUrl('/phrases');
+      window.location.href = '/phrases';
     },
     (err) => {
       this.stopLoading();

@@ -36,7 +36,8 @@ export class RegisterPersonFormComponent implements OnInit {
     }
     console.log(this.credentials);
     this.authenticationService.register(this.credentials).subscribe(() => {
-      this.router.navigateByUrl('/phrases');
+      //this.router.navigateByUrl('/phrases');
+      window.location.href = '/phrases';
     },
     (err) => {
       console.log(err);

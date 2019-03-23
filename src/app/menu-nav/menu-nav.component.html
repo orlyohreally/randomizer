@@ -1,4 +1,4 @@
-<nav mat-tab-nav-bar [backgroundColor]="primary">
+<nav mat-tab-nav-bar >
   <a mat-tab-link *ngFor="let link of navLinks | authFilter" [routerLink]="link.path" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
     {{link.label}}
   </a>

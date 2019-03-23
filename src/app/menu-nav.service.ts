@@ -11,7 +11,7 @@ export class MenuNavService {
       {
         name: 'random-phrase',
         label: 'Random phrase',
-        path: '',
+        path: '/phrase',
         auth: true
       },
       {

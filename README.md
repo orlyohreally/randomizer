@@ -1,27 +1,67 @@
 # Randomizer
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.4.
+Web application to get random phrases from the database developed with MEAN stack
+Functionality of the web application:
 
-## Development server
+- display random phrase from database
+- user registration
+- user authentication
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Getting started
 
-## Code scaffolding
+These instructions will get you a copy of the project up and running on your local machine for development purposes.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Requirements
 
-## Build
+Node.js v10.15.3  
+npm 6.4.1
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+### Installation
 
-## Running unit tests
+Clone the repository
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```
+git clone https://github.com/orlyohreally/randomizer.git
+```
 
-## Running end-to-end tests
+Install the dependencies
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+```
+npm install
+```
 
-## Further help
+Run mongodb (path may vary) on port 217017
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```
+cd C:\Program Files\MongoDB\Server\4.0\bin
+mongod.exe
+```
+
+Build Angular project
+
+```
+ng build
+```
+
+Run Node.js server
+
+```
+node server.js
+```
+
+The project will be available at http://localhost:3000. To get random phrases authentication is required
+
+## Built with MEAN stack
+
+- [MongoDB](https://www.mongodb.com) - document database with the scalability and flexibility
+- [Express](https://expressjs.com/) - back-end web application framework running on top of Node.js
+- [Angular 6](https://angular.io/) - front-end web app framework
+- [NodeJS](https://nodejs.org/) - JavaScript runtime environment
+
+## Authors
+
+- **Orly Knop** - [orlyohreally](https://github.com/orlyohreally)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) file for details

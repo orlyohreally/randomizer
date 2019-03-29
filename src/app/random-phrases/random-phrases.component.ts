@@ -70,11 +70,11 @@ export class RandomPhrasesComponent implements OnInit {
     this.phraseService.addPhrase(phrase).subscribe(
       res => {
         group.setValue({ _id: res._id, text: res.text });
-        this.snackBar.open('Phase was added');
+        this.snackBar.open('Phrase was added', null, { duration: 2000 });
       },
       err => {
         console.log('on add err', err);
-        this.snackBar.open(err);
+        this.snackBar.open(err, null, { duration: 2000 });
       }
     );
   }
@@ -83,10 +83,13 @@ export class RandomPhrasesComponent implements OnInit {
     this.phraseService.updatePhrase(phrase).subscribe(
       res => {
         console.log('on edit', res);
-        this.snackBar.open('Phase was updated');
+        this.snackBar.open('Phrase was updated', null, {
+          duration: 2000
+        });
       },
       err => {
         console.log('on edit err', err);
+        this.snackBar.open(err, null, { duration: 2000 });
       }
     );
   }
@@ -131,10 +134,11 @@ export class RandomPhrasesComponent implements OnInit {
           res => {
             this.phraseForms.removeAt(i);
             console.log('on delete', this.phraseForms, i);
-            this.snackBar.open('Phase was removed');
+            this.snackBar.open('Phrase was removed', null, { duration: 2000 });
           },
           err => {
             console.log('on delete err', err);
+            this.snackBar.open(err, null, { duration: 2000 });
           }
         );
     }

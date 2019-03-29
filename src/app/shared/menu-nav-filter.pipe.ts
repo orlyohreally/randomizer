@@ -6,14 +6,15 @@ import { AuthenticationService } from '../authentication.service';
   pure: false
 })
 export class AuthFilterPipe implements PipeTransform {
-  
   constructor(private authenticationService: AuthenticationService) {}
   isLoggedIn: boolean = this.authenticationService.isLoggedIn();
   transform(items: any): any {
-    if(!items) {
+    if (!items) {
       return items;
     }
-    
-    return items.filter(item => item.auth === this.isLoggedIn);
+
+    return items.filter(
+      item => item.auth === false || item.auth === this.isLoggedIn
+    );
   }
 }

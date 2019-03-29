@@ -7,7 +7,7 @@ var auth = jwt({
 });
 
 var ctrlPhrase = require("../controllers/phrase");
-router.get("/phrases", auth, ctrlPhrase.list);
+router.get("/phrases", ctrlPhrase.list);
 router.post("/phrases", auth, ctrlPhrase.create);
 router.put("/phrases/:id", auth, ctrlPhrase.update);
 router.delete("/phrases/:id", auth, ctrlPhrase.delete);

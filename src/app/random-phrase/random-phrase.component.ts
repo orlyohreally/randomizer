@@ -26,10 +26,8 @@ export class RandomPhraseComponent implements OnInit {
   getPhrases(): void {
     this.phraseService.getPhrases().subscribe(
       phrases => {
-        console.log('phrases', phrases);
         this.phrases = phrases;
         this.shuffle(this.phrases);
-        console.log('phrases', this.phrases);
         this.getRandomPhrase();
       },
       err => {
@@ -44,17 +42,14 @@ export class RandomPhraseComponent implements OnInit {
   }
 
   getRandomPhrase() {
-    console.log(this.currentIndex);
     this.currentIndex = this.currentIndex >= 0 ? this.currentIndex + 1 : 0;
 
     if (this.currentIndex >= this.phrases.length) {
       this.shuffle(this.phrases);
       this.currentIndex = 0;
-      console.log('phrases', this.phrases);
     }
 
     this.isLoading = true;
-    console.log('getting random phrase', this.currentIndex);
     this.phrase = this.phrases[this.currentIndex];
     this.isLoading = false;
   }

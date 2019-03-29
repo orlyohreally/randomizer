@@ -30,6 +30,7 @@ import { AuthenticationService } from './authentication.service';
 import { MenuNavService } from './menu-nav.service';
 import { AuthFilterPipe } from './shared/menu-nav-filter.pipe';
 import { RemovePhraseConfirmDialogComponent } from './remove-phrase-confirm-dialog/remove-phrase-confirm-dialog.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { RemovePhraseConfirmDialogComponent } from './remove-phrase-confirm-dial
     LogoutComponent,
     MenuNavComponent,
     AuthFilterPipe,
-    RemovePhraseConfirmDialogComponent
+    RemovePhraseConfirmDialogComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

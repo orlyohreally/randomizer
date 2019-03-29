@@ -1,0 +1,19 @@
+.footer {
+  // position: absolute;
+  // bottom: 0;
+  // left: 0;
+  // right: 0;
+  height: 65px;
+  background: #3f51b5;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .copyright-text {
+    margin: 0 4px;
+  }
+  a {
+    color: inherit;
+  }
+}

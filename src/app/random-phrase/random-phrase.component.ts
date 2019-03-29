@@ -13,6 +13,7 @@ export class RandomPhraseComponent implements OnInit {
   public phrase: Phrase;
   public isLoading: boolean;
   public errorMessage: String;
+  public currentIndex: number;
   constructor(private phraseService: PhraseService, private router: Router) {}
 
   ngOnInit() {
@@ -27,6 +28,8 @@ export class RandomPhraseComponent implements OnInit {
       phrases => {
         console.log('phrases', phrases);
         this.phrases = phrases;
+        this.shuffle(this.phrases);
+        console.log('phrases', this.phrases);
         this.getRandomPhrase();
       },
       err => {
@@ -35,31 +38,32 @@ export class RandomPhraseComponent implements OnInit {
           this.router.navigateByUrl('/login');
         } else {
           this.errorMessage = err;
-          this.displayFake();
         }
       }
     );
   }
 
   getRandomPhrase() {
+    console.log(this.currentIndex);
+    this.currentIndex = this.currentIndex >= 0 ? this.currentIndex + 1 : 0;
+
+    if (this.currentIndex >= this.phrases.length) {
+      this.shuffle(this.phrases);
+      this.currentIndex = 0;
+      console.log('phrases', this.phrases);
+    }
+
     this.isLoading = true;
-    const i = Math.floor(Math.random() * this.phrases.length);
-    console.log('getting random phrase', i);
-    this.phrase = this.phrases[i];
+    console.log('getting random phrase', this.currentIndex);
+    this.phrase = this.phrases[this.currentIndex];
     this.isLoading = false;
   }
 
-  displayFake(): void {
-    this.phrases = [
-      {
-        _id: 1,
-        text: 'text 1'
-      },
-      {
-        _id: 2,
-        text: 'text testing'
-      }
-    ];
-    this.getRandomPhrase();
+  // Fisher-Yates shuffle
+  shuffle(array: Array<Object>) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
   }
 }

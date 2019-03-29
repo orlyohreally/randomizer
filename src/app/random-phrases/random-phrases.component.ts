@@ -131,9 +131,7 @@ export class RandomPhrasesComponent implements OnInit {
           res => {
             this.phraseForms.removeAt(i);
             console.log('on delete', this.phraseForms, i);
-            this.snackBar.open('Phase was removed', null, {
-              duration: 1000
-            });
+            this.snackBar.open('Phase was removed');
           },
           err => {
             console.log('on delete err', err);

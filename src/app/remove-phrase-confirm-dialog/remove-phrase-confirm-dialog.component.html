@@ -1,0 +1,16 @@
+<div>
+  <h1 mat-dialog-title>Remove phrase</h1>
+  <div mat-dialog-content>
+    <div>
+      Are you sure you want to remove this phrase?
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="primary" [mat-dialog-close]="false">
+      Cancel
+    </button>
+    <button mat-raised-button color="warn" [mat-dialog-close]="true">
+      Delete
+    </button>
+  </div>
+</div>

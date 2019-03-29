@@ -1,1 +1,13 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.mat-snack-bar-container {
+  border-radius: 4px;
+  box-sizing: border-box;
+  display: block;
+  margin: 24px !important;
+  max-width: 33vw;
+  min-width: 344px;
+  padding: 14px 16px;
+  min-height: 48px;
+  transform-origin: center;
+}

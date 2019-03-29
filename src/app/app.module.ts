@@ -4,7 +4,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './/app-routing.module';
 
 import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
-import { MatListModule, MatInputModule, MatFormFieldModule, MatTabsModule, MatCardModule, MatButtonModule, MatProgressSpinnerModule} from '@angular/material';
+import {
+  MatListModule,
+  MatInputModule,
+  MatIconModule,
+  MatFormFieldModule,
+  MatTabsModule,
+  MatCardModule,
+  MatButtonModule,
+  MatProgressSpinnerModule,
+  MatDialogModule,
+  MatSnackBarModule
+} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { RandomPhrasesComponent } from './random-phrases/random-phrases.component';
@@ -18,6 +29,7 @@ import { PhraseService } from './phrase.service';
 import { AuthenticationService } from './authentication.service';
 import { MenuNavService } from './menu-nav.service';
 import { AuthFilterPipe } from './shared/menu-nav-filter.pipe';
+import { RemovePhraseConfirmDialogComponent } from './remove-phrase-confirm-dialog/remove-phrase-confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +40,8 @@ import { AuthFilterPipe } from './shared/menu-nav-filter.pipe';
     LoginPersonFormComponent,
     LogoutComponent,
     MenuNavComponent,
-    AuthFilterPipe
+    AuthFilterPipe,
+    RemovePhraseConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -42,11 +55,14 @@ import { AuthFilterPipe } from './shared/menu-nav-filter.pipe';
     MatCardModule,
     MatButtonModule,
     MatTabsModule,
+    MatIconModule,
     MatProgressSpinnerModule,
-    BrowserAnimationsModule
-    
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatSnackBarModule
   ],
+  entryComponents: [RemovePhraseConfirmDialogComponent],
   providers: [PhraseService, AuthenticationService, MenuNavService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

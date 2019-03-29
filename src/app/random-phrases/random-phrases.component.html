@@ -2,25 +2,29 @@
   <div class="loader">
     <mat-spinner *ngIf="isLoading" [color]="primary"></mat-spinner>
   </div>
-  <div class="phrases"*ngIf="!isLoading">
-      <form [formGroup]="phraseForm">
-        <div formArrayName="phrases">
-          <div *ngFor="let phrase of phraseForms.controls; let i=index" [formGroupName]="i">
-            <!--<mat-form-field appearance="outline">
-              <mat-label>Id</mat-label>
-              <input matInput formControlName="id">
-            </mat-form-field>-->
-            <mat-form-field appearance="outline">
-              <mat-label>Phrase</mat-label>
-              <input matInput formControlName="text">
-            </mat-form-field>
-            <button mat-raised-button color="primary" (click)="removePhrase(i)">Remove phrase</button>
-          </div>
+  <div class="phrases" *ngIf="!isLoading">
+    <form [formGroup]="phraseForm">
+      <div formArrayName="phrases">
+        <div
+          class="phrase"
+          *ngFor="let phrase of phraseForms.controls; let i = index"
+          [formGroupName]="i"
+        >
+          <mat-form-field appearance="outline">
+            <mat-label>Phrase</mat-label>
+            <textarea rows="3" matInput formControlName="text"></textarea>
+          </mat-form-field>
+          <button mat-mini-fab color="primary" (click)="removePhrase(i)">
+            <mat-icon>remove</mat-icon>
+          </button>
         </div>
-      </form>
-    <button mat-raised-button color="primary" (click)="addPhrase()">Add new phrase</button>
+      </div>
+    </form>
+    <button mat-mini-fab color="primary" (click)="addPhrase()">
+      <mat-icon>add</mat-icon>
+    </button>
   </div>
 </div>
 <div *ngIf="!!errorMessage">
-  {{errorMessage}}
+  {{ errorMessage.message }}
 </div>

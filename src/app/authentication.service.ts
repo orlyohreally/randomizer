@@ -58,14 +58,18 @@ export class AuthenticationService {
       return false;
     }
   }
-//'login'|'register'|'profile'
-  private request(method: 'post'|'get', type: 'login'|'register', person?: TokenPayload): Observable<any> {
+
+  private request(
+    method: 'post' | 'get',
+    type: 'login' | 'register',
+    person?: TokenPayload
+  ): Observable<any> {
     let base;
 
     if (method === 'post') {
       base = this.http.post(`/api/${type}`, person);
     } else {
-      base = this.http.get(`/api/${type}`, { headers: this.getAuthHeaders()});
+      base = this.http.get(`/api/${type}`, { headers: this.getAuthHeaders() });
     }
 
     const request = base.pipe(
@@ -79,11 +83,11 @@ export class AuthenticationService {
 
     return request;
   }
-  
+
   public login(person: TokenPayload): Observable<any> {
     return this.request('post', 'login', person);
   }
-  
+
   public register(person: TokenPayload): Observable<any> {
     return this.request('post', 'register', person);
   }
@@ -92,8 +96,8 @@ export class AuthenticationService {
     this.token = '';
     window.localStorage.removeItem('mean-token');
   }
-  
-  public getAuthHeaders(){
+
+  public getAuthHeaders() {
     return { Authorization: `Bearer ${this.getToken()}` };
   }
 }

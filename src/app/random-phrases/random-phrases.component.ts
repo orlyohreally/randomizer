@@ -1,9 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PhraseService } from '../phrase.service'
+import { PhraseService } from '../phrase.service';
 import { Phrase } from '../phrase';
-import { FormControl, FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
-import { MatProgressSpinnerModule, MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+  FormBuilder,
+  FormArray
+} from '@angular/forms';
+import { MatDialog, MatSnackBar } from '@angular/material';
+import { RemovePhraseConfirmDialogComponent } from '../remove-phrase-confirm-dialog/remove-phrase-confirm-dialog.component';
+export interface DialogData {
+  delete: boolean;
+}
 
 @Component({
   selector: 'app-random-phrases',
@@ -11,88 +21,142 @@ import { MatProgressSpinnerModule, MatButtonModule, MatFormFieldModule, MatInput
   styleUrls: ['./random-phrases.component.scss']
 })
 export class RandomPhrasesComponent implements OnInit {
-
   public phrases: Phrase[];
   public phraseForm: FormGroup;
   public isLoading: boolean;
   public errorMessage: String;
-  constructor(private phraseService: PhraseService, private formBuilder: FormBuilder, private router: Router) { 
-    
-  }
-  
+  constructor(
+    private phraseService: PhraseService,
+    private formBuilder: FormBuilder,
+    private router: Router,
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar
+  ) {}
+
   ngOnInit() {
     this.errorMessage = '';
     this.isLoading = true;
     this.phrases = [];
     this.getPhrases();
-    
-    console.log(this.phrases);
   }
-  initPhrase() {
-    return new FormGroup({
-      id: new FormControl(''),
-      text: new FormControl('')
+
+  initPhrase(phrase: Phrase) {
+    const group = new FormGroup({
+      _id: new FormControl(phrase._id),
+      text: new FormControl(phrase.text)
     });
+    this.onChanges(group);
+    return group;
   }
+
   get phraseForms() {
     return this.phraseForm.get('phrases') as FormArray;
   }
+
   initForm() {
     this.phraseForm = this.formBuilder.group({
-      phrases: new FormArray(this.phrases.map(phrase=> {
-        const group = this.initPhrase();
-        group.patchValue(phrase);
-        return group;
-      }))
+      phrases: new FormArray(
+        this.phrases.map(phrase => {
+          const group = this.initPhrase(phrase);
+          return group;
+        })
+      )
     });
     this.isLoading = false;
   }
-  
+  onChanges(group: FormGroup): void {
+    group.valueChanges.subscribe(val => {
+      console.log('on changes', val);
+      if (!val._id) {
+        this.phraseService.addPhrase(val).subscribe(
+          res => {
+            group.setValue({ _id: res._id, text: res.text });
+            this.snackBar.open('Phase was added');
+          },
+          err => {
+            console.log('on add err', err);
+          }
+        );
+      } else {
+        this.phraseService.updatePhrase(val).subscribe(
+          res => {
+            console.log('on edit', res);
+            this.snackBar.open('Phase was updated');
+          },
+          err => {
+            console.log('on edit err', err);
+          }
+        );
+      }
+    });
+  }
   addPhrase() {
     const phrase = this.formBuilder.group({
-      id: null,
+      _id: null,
       text: ''
     });
     this.phraseForms.push(phrase);
+    this.onChanges(phrase);
   }
-  
-  removePhrase(i) {
-    this.phraseForms.removeAt(i);
+
+  confirmRemove(): Promise<boolean> {
+    const dialogRef = this.dialog.open(RemovePhraseConfirmDialogComponent, {
+      data: { delete: false }
+    });
+
+    return dialogRef.afterClosed().toPromise();
   }
-  
+
+  async removePhrase(i: number): Promise<void> {
+    if (await this.confirmRemove()) {
+      this.phraseService
+        .deletePhrase(this.phraseForms.controls[i].value)
+        .subscribe(
+          res => {
+            this.phraseForms.removeAt(i);
+            console.log('on delete', this.phraseForms, i);
+            this.snackBar.open('Phase was removed', null, {
+              duration: 1000
+            });
+          },
+          err => {
+            console.log('on delete err', err);
+          }
+        );
+    }
+  }
+
   getPhrases(): void {
-    this.phraseService.getPhrases().subscribe(phrases => 
-      {
-        console.log("phrases", phrases);
+    this.phraseService.getPhrases().subscribe(
+      phrases => {
+        console.log('phrases', phrases);
         this.phrases = phrases;
         this.initForm();
       },
       err => {
-        console.log("phrases error", err);
-        if(err.status === 401) {
+        console.log('phrases error', err);
+        if (err.status === 401) {
           this.router.navigateByUrl('/login');
-        }
-        else {
+        } else {
           this.errorMessage = err;
           this.displayFake();
         }
       }
-    );   
+    );
   }
-  
-  
+
   displayFake(): void {
     this.phrases = [
       {
-        id: 1,
-        text: "text 1"
+        _id: 1,
+        text: 'text 1'
       },
       {
-        id: 2,
-        text: "text testing"
+        _id: 2,
+        text: 'text testing'
       }
     ];
-    
+
     this.initForm();
   }
 }

@@ -2,18 +2,23 @@
   <div class="loader">
     <mat-spinner *ngIf="isLoading" [color]="primary"></mat-spinner>
   </div>
-  <div *ngIf="!isLoading" class="phrase">
+  <div *ngIf="!isLoading && !phrase">
+    No data found
+  </div>
+  <div *ngIf="!isLoading && !!phrase" class="phrase">
     <mat-card>
       <mat-card-header>
         <mat-card-title>
-        Random phrase
+          Random phrase
         </mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        {{phrase.text}}
+        {{ phrase.text }}
       </mat-card-content>
     </mat-card>
 
-    <button mat-raised-button color="primary" (click)="getRandomPhrase()">Get new phrase</button>
+    <button mat-raised-button color="primary" (click)="getRandomPhrase()">
+      Get new phrase
+    </button>
   </div>
 </div>

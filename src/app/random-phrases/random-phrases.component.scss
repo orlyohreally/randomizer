@@ -2,8 +2,18 @@
   margin: 20px;
   display: flex;
   justify-content: center;
-  
-  .mat-form-field {
-    
+
+  .phrases {
+    width: 80%;
+    text-align: center;
+
+    .phrase {
+      display: flex;
+      align-items: center;
+
+      .mat-input-container {
+        width: calc(100% - 50px);
+      }
+    }
   }
 }

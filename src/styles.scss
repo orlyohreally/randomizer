@@ -5,6 +5,7 @@
   box-sizing: border-box;
   display: block;
   margin: 24px !important;
+  width: calc(100% - 48px) !important;
   max-width: 33vw;
   min-width: 344px;
   padding: 14px 16px;

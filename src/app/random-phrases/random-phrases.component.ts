@@ -11,6 +11,7 @@ import {
 } from '@angular/forms';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { RemovePhraseConfirmDialogComponent } from '../remove-phrase-confirm-dialog/remove-phrase-confirm-dialog.component';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 export interface DialogData {
   delete: boolean;
 }
@@ -64,32 +65,47 @@ export class RandomPhrasesComponent implements OnInit {
     });
     this.isLoading = false;
   }
-  onChanges(group: FormGroup): void {
-    group.valueChanges.subscribe(val => {
-      console.log('on changes', val);
-      if (!val._id) {
-        this.phraseService.addPhrase(val).subscribe(
-          res => {
-            group.setValue({ _id: res._id, text: res.text });
-            this.snackBar.open('Phase was added');
-          },
-          err => {
-            console.log('on add err', err);
-          }
-        );
-      } else {
-        this.phraseService.updatePhrase(val).subscribe(
-          res => {
-            console.log('on edit', res);
-            this.snackBar.open('Phase was updated');
-          },
-          err => {
-            console.log('on edit err', err);
-          }
-        );
+
+  createPhrase(group: FormGroup, phrase: Phrase) {
+    this.phraseService.addPhrase(phrase).subscribe(
+      res => {
+        group.setValue({ _id: res._id, text: res.text });
+        this.snackBar.open('Phase was added');
+      },
+      err => {
+        console.log('on add err', err);
+        this.snackBar.open(err);
       }
-    });
+    );
   }
+
+  editPhrase(group: FormGroup, phrase: Phrase) {
+    this.phraseService.updatePhrase(phrase).subscribe(
+      res => {
+        console.log('on edit', res);
+        this.snackBar.open('Phase was updated');
+      },
+      err => {
+        console.log('on edit err', err);
+      }
+    );
+  }
+  onChanges(group: FormGroup): void {
+    group.valueChanges
+      .pipe(
+        debounceTime(400),
+        distinctUntilChanged()
+      )
+      .subscribe(val => {
+        console.log('on changes', val);
+        if (!val._id) {
+          this.createPhrase(group, val);
+        } else {
+          this.editPhrase(group, val);
+        }
+      });
+  }
+
   addPhrase() {
     const phrase = this.formBuilder.group({
       _id: null,

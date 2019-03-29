@@ -3,7 +3,7 @@
 Web application to get random phrases from the database developed with MEAN stack
 Functionality of the web application:
 
-- display random phrase from database
+- BREAD (browse, read, edit, add, delete) random phrases
 - user registration
 - user authentication
 
@@ -49,7 +49,7 @@ Run Angular project
 ng serve --proxy-config proxy.conf.json
 ```
 
-The project will be available at http://localhost:3000. To get random phrases authentication is required
+The project will be available at http://localhost:4200. To get random phrases authentication is required
 
 ## Built with
 
@@ -57,7 +57,7 @@ The project will be available at http://localhost:3000. To get random phrases au
 - [Express](https://expressjs.com/) - back-end web application framework running on top of Node.js
 - [Angular 6](https://angular.io/) - front-end web app framework
 - [NodeJS](https://nodejs.org/) - JavaScript runtime environment
-- [Angular Material](https://material.angular.io)) - Material Design components for Angular
+- [Angular Material](https://material.angular.io) - Material Design components for Angular
 
 ## Authors
 
